@@ -2,7 +2,7 @@
 
 > A NodeJS server which allows to run server-side JavaScript files directly (server must be powered by Nginx).
 
-If your VPS contains many application and you don't want to set up NodeJS server for every application, you on the right way. **node-direct** allows to run JavaScript on a server just like **.php** files. The tool initializes one NodeJS instance per many websites and executes JavaScript files when URLs like **example.com/foo/bar.srv.js** are requested. **.srv.js** extension is configurable.
+If your VPS contains many application and you don't want to set up NodeJS server for every application, you're in the right place. **node-direct** allows to run JavaScript on a server just like **.php** files. The tool initializes one NodeJS instance per many websites and executes JavaScript files when URLs like **example.com/foo/bar.srv.js** are requested. **.srv.js** extension is configurable.
 
 You know how to set up and run PHP script. You just need to upload it and run like this: *example.com/foo.php*. But what about NodeJS? You must define routes, run every app on its own port, dance around deploying, make sure that all instances work after server reload... It's OK if you do a big application but when you have only small server-side utilities (like ajax proxy) they just don't worth all these actions.
 
