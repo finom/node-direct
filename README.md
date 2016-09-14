@@ -53,5 +53,20 @@ module.exports = function(req, res) {
 }
 ```
 
-## Todo
-- ``--bodyparser`` flag
+
+## Run node-direct on startup (Linux)
+
+You can add cron job to run the server on startup. To modify crontab run ``crontab -e``. Add the job to the end of this file:
+
+```
+@reboot <path_to_node> <path_to_installed_module> [<flags>]
+```
+
+- ``path_to_node`` - absolute path to NoseJS binary (run ``which node`` to get the path)
+- ``path_to_installed_module`` - absolute path to installed node-direct (there is no direct way to get it, you'll need to use Google to figure out the path)
+- ``flags`` - flags you want to use
+
+Example:
+```
+@reboot /usr/local/bin/node /usr/local/lib/node_modules/node-direct/index.js --port=8123
+```

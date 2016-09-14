@@ -2,8 +2,12 @@
 const express = require('express');
 const { port = 8123 } = require('minimist')(process.argv.slice(2));
 const fileExists = require('file-exists');
+const bodyParser = require('body-parser');
 
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get('*', function(req, res) {
     const filePath = req.get('X-Requested-File-Path');
