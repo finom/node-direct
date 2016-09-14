@@ -29,7 +29,7 @@ app.get('*', (req, res) => {
 
     const watcher = fs.watch(filePath, (eventType) => {
         if (eventType === 'change') {
-            delete require.cache[filePath];
+            delete require.cache[require.resolve(filePath)];
             watcher.close();
         }
     });
