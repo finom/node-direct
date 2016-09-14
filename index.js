@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const express = require('express');
 const { port = 8123 } = require('minimist')(process.argv.slice(2));
 const fileExists = require('file-exists');
