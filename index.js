@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 const express = require('express');
-const { port = 8123 } = require('minimist')(process.argv.slice(2));
 const fileExists = require('file-exists');
 const bodyParser = require('body-parser');
+const fs = require('fs');
+const { port = 8123 } = require('minimist')(process.argv.slice(2));
 
 const app = express();
 
@@ -25,6 +26,11 @@ app.get('*', (req, res) => {
     } catch (e) {
         return res.status(500).send(`<pre>${e.stack}</pre>`);
     }
+
+    fs.watchFile(filePath, () => {
+        delete require.cache[filePath];
+        fs.unwatchFile(filePath);
+    });
 
     return undefined;
 });
