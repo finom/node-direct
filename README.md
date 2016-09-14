@@ -4,7 +4,7 @@
 
 > A NoseJS server which allows to run server-side JavaScript files directly.
 
-If your VPS contains many application and you don't want to set up NodeJS server for every application, you on the right way. **node-direct** allows to run JavaScript on a server just like PHP files. The tool creates one NodeJS server per many websites and executes JavaScript files when **XXX.srv.js** paths are requested.
+If your VPS contains many application and you don't want to set up NodeJS server for every application, you on the right way. **node-direct** allows to run JavaScript on a server just like PHP files. The tool creates one NodeJS server per many websites and executes JavaScript files when **/foo/bar.srv.js** paths are requested.
 
 You know how to run PHP files: *example.com/foo.php* but now you can run JavaScript files the same way: *example.com/bar.srv.js* or even *example.com/* when *index.srv.js* name is used.
 
