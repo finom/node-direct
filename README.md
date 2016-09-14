@@ -1,4 +1,4 @@
-# node-direct
+# node-direct [![npm version](https://badge.fury.io/js/node-direct.svg)](https://badge.fury.io/js/node-direct)
 
 **in development**
 
