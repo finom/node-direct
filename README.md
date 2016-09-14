@@ -2,11 +2,11 @@
 
 **in development**
 
-> A server which allows to run JavaScript files directly.
+> A NoseJS server which allows to run server-side JavaScript files directly.
 
-If a server contains many application and you don't want to set up NodeJS server for every application, you on the right way. **node-direct** allows to run JavaScript on a server just like PHP files. The tool creates one server per many websites and executes JavaScript files on the server when ** *.srv.js ** paths are requested.
+If your VPS contains many application and you don't want to set up NodeJS server for every application, you on the right way. **node-direct** allows to run JavaScript on a server just like PHP files. The tool creates one NodeJS server per many websites and executes JavaScript files when **\*.srv.js ** paths are requested.
 
-You know how to run PHP files: *example.com/foo.php* but now you can run JavaScript files the same way: *example.com/bar.srv.js*.
+You know how to run PHP files: *example.com/foo.php* but now you can run JavaScript files the same way: *example.com/bar.srv.js* or even *example.com/* when *index.srv.js* name is used.
 
 ```
 npm install -g node-direct
@@ -21,26 +21,24 @@ All the magic mostly happens on Nginx server. You'll need to configure it to han
 ```
 location ~ \.srv\.js$ {
     root <path_to_website_files>;
-    index index.srv.js;
     proxy_pass http://localhost:<port>;
     proxy_set_header X-Requested-File-Path $document_root$uri;
 }
 ```
 
-``path_to_website_files`` - where website static is located.
-``port`` - a port of node-direct server
+- ``path_to_website_files`` - where static files are located.
+- ``port`` - a port of node-direct server
 
 Example:
 ```
 # Serve static files
 location / {
     root /var/web/example.com/public;
-    index index.html index.htm;
+    index index.srv.js index.html index.htm;
 }
 
 location ~ \.srv\.js$ {
     root /var/web/example.com/public;
-    index index.srv.js;
     proxy_pass http://localhost:8123;
     proxy_set_header X-Requested-File-Path $document_root$uri;
 }
@@ -54,3 +52,6 @@ module.exports = function(req, res) {
     res.send('it works!');
 }
 ```
+
+## Todo
+- ``--bodyparser`` flag
