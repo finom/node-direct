@@ -1,0 +1,14 @@
+{
+    "extends": [
+        "airbnb"
+    ],
+    "rules": {
+        "indent": ["error", 4],
+        "no-var": "error",
+        "comma-dangle": ["error", "never"],
+        "no-console": 0
+    },
+    "env": {
+        "node": true
+    }
+}

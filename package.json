@@ -1,18 +1,38 @@
 {
   "name": "node-direct",
-  "version": "0.1.0",
+  "version": "0.0.0-auto",
+  "engines" : { "node" : ">=6" },
   "description": "A server which allows to run JavaScript files directly",
   "bin": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint .",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "check-updates": "ncu",
+    "upgrade": "npm run check-updates -- --upgradeAll && npm install"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/finom/node-direct.git"
+    "url": "https://github.com/finom/node-direct.git"
   },
   "keywords": [
     "node"
   ],
+  "config": {
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert"
+      ]
+    },
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    }
+  },
   "author": "Andrey Gubanov",
   "license": "MIT",
   "bugs": {
@@ -24,5 +44,16 @@
     "express": "^4.14.0",
     "file-exists": "^2.0.0",
     "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.5.0",
+    "eslint-config-airbnb": "^11.1.0",
+    "eslint-plugin-import": "^1.14.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.2.1",
+    "ghooks": "^1.3.2",
+    "npm-check-updates": "^2.8.0",
+    "semantic-release": "^4.3.5",
+    "validate-commit-msg": "^2.8.0"
   }
 }

@@ -1,24 +1,27 @@
 # node-direct [![npm version](https://badge.fury.io/js/node-direct.svg)](https://badge.fury.io/js/node-direct)
 
-**in development**
+> A NodeJS server which allows to run server-side JavaScript files directly (server must be powered by Nginx).
 
-> A NodeJS server which allows to run server-side JavaScript files directly.
+If your VPS contains many application and you don't want to set up NodeJS server for every application, you on the right way. **node-direct** allows to run JavaScript on a server just like **.php** files. The tool creates one NodeJS server per many websites and executes JavaScript files when **example.com/foo/bar.srv.js** paths are requested. **.srv.js** extension is configurable.
 
-If your VPS contains many application and you don't want to set up NodeJS server for every application, you on the right way. **node-direct** allows to run JavaScript on a server just like PHP files. The tool creates one NodeJS server per many websites and executes JavaScript files when **/foo/bar.srv.js** paths are requested.
+You know how to set up and run PHP script. You just need to upload it and run like this: *example.com/foo.php*. But what about NodeJS? You must define routes, run every app on its own port, dance around deploying, make sure that all instances work after server reload... It's OK if you do big application but when you have only server-side utilities (like proxy) they just don't worth all these actions.
 
-You know how to run PHP files: *example.com/foo.php* but now you can run JavaScript files the same way: *example.com/bar.srv.js* or even *example.com/* when *index.srv.js* name is used.
-
-```
+Install:
+```sh
 npm install -g node-direct
+```
+
+Run:
+```sh
 node-direct --port=8000
 ```
 
 
 ## Nginx configuration
 
-All the magic mostly happens on Nginx server. You'll need to configure it to handle requests to **.srv.js** files for every website.
+All the magic mostly happens on Nginx side (the project itself is extremely small). You'll need to configure it to handle requests to **.srv.js** files for every website config.
 
-```
+```nginx
 location ~ \.srv\.js$ {
     root <path_to_website_files>;
     proxy_pass http://localhost:<port>;
@@ -30,7 +33,7 @@ location ~ \.srv\.js$ {
 - ``port`` - a port of node-direct server
 
 Example:
-```
+```nginx
 # Serve static files
 location / {
     root /var/web/example.com/public;

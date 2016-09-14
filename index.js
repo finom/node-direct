@@ -9,22 +9,24 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('*', function(req, res) {
+app.get('*', (req, res) => {
     const filePath = req.get('X-Requested-File-Path');
 
-    if(!filePath) {
+    if (!filePath) {
         return res.status(500).send('Server did not provide file path');
     }
 
-    if(!fileExists(filePath)) {
+    if (!fileExists(filePath)) {
         return res.status(500).send('Cannot find such file on the server');
     }
 
     try {
-        require(filePath)(req, res);
+        require(filePath)(req, res); // eslint-disable-line global-require
     } catch (e) {
         return res.status(500).send(`<pre>${e.stack}</pre>`);
     }
+
+    return undefined;
 });
 
 app.listen(port, () => {
