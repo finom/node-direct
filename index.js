@@ -27,9 +27,11 @@ app.get('*', (req, res) => {
         return res.status(500).send(`<pre>${e.stack}</pre>`);
     }
 
-    fs.watchFile(filePath, () => {
-        delete require.cache[filePath];
-        fs.unwatchFile(filePath);
+    const watcher = fs.watch(filePath, (eventType) => {
+        if (eventType === 'change') {
+            delete require.cache[filePath];
+            watcher.close();
+        }
     });
 
     return undefined;
