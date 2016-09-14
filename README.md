@@ -32,6 +32,12 @@ location ~ \.srv\.js$ {
 
 Example:
 ```
+# Serve static files
+location / {
+    root /var/web/example.com/public;
+    index index.html index.htm;
+}
+
 location ~ \.srv\.js$ {
     root /var/web/example.com/public;
     index index.srv.js;
