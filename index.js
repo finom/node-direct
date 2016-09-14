@@ -18,7 +18,7 @@ app.get('*', (req, res) => {
     }
 
     if (!fileExists(filePath)) {
-        return res.status(500).send('Cannot find such file on the server');
+        return res.status(404).send('Cannot find such file on the server');
     }
 
     try {
