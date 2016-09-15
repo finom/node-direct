@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('*', (req, res) => {
+app.all('*', (req, res) => {
     const filePath = req.get('X-Requested-File-Path');
 
     if (!filePath) {
