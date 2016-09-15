@@ -18,11 +18,11 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
     let filePath;
 
-    if(standalone) {
+    if (standalone) {
         const potentialIndexFile = `./${path.join(req.path.substring(1), `index${ext}`)}`;
-        if(req.path.endsWith(ext)) {
-            filePath = `./${req.path}`
-        } else if(pathExists.sync(potentialIndexFile)) {
+        if (req.path.endsWith(ext)) {
+            filePath = `./${req.path}`;
+        } else if (pathExists.sync(potentialIndexFile)) {
             filePath = potentialIndexFile;
         } else {
             return next();
@@ -55,7 +55,7 @@ app.use((req, res, next) => {
     return undefined;
 });
 
-if(standalone) {
+if (standalone) {
     app.use(express.static(root));
 }
 
