@@ -4,7 +4,7 @@
   "engines": {
     "node": ">=6"
   },
-  "description": "A server which allows to run JavaScript files directly",
+  "description": "A server which allows to run server-side JavaScript files via NodeJS as easy as PHP via Apache",
   "bin": "index.js",
   "scripts": {
     "test": "eslint .",
