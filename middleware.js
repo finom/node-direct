@@ -1,6 +1,5 @@
 const path = require('path');
 const pathExists = require('path-exists');
-const fs = require('fs');
 const freshUp = require('fresh-up');
 
 const {
