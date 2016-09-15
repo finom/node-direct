@@ -3,14 +3,14 @@ const express = require('express');
 const fileExists = require('file-exists');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const { port = 8123 } = require('minimist')(process.argv.slice(2));
+const { port = 8123, ext = '.srv.js' } = require('minimist')(process.argv.slice(2));
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.all('*', (req, res) => {
+app.all(`*${ext}`, (req, res) => {
     const filePath = req.get('X-Requested-File-Path');
 
     if (!filePath) {
