@@ -54,14 +54,27 @@ server {
 ```
 
 ## Usage
+
 **node-direct** is powered by [Express](http://expressjs.com/). Every **.srv.js** file should export a function which accepts ``request`` and ``responce`` objects created by Express.
 
 ```js
+const someModule = require('some-module');
 module.exports = function(req, res) {
     res.send('it works!');
 }
 ```
 Check out Express documentation for more info.
+
+You can use local **package.json** and require any modules by **.srv.js** files placed at **node_modules** as you usually do. There is an example of potential file structure of an app.
+```
+/package.json - a package file with dependencies and devDependencies used by server files
+/index.html - main HTML file
+/js/app.js - client-side JavaScript app
+/css/style.css - styles
+/node_modules/ - things installed by "npm install"
+/foo/index.srv.js - some API which allows to make requests to /foo/
+/bar/index.srv.js - some dynamic HTML page returned when /bar/ is requested
+```
 
 
 ## Running node-direct on startup (Ubuntu)
@@ -79,4 +92,39 @@ You can add cron job to run the server on startup. To modify crontab run ``cront
 Example:
 ```
 @reboot /usr/local/bin/node /usr/local/lib/node_modules/node-direct/index.js --port=8123
+```
+
+## Troubleshooting
+
+As you know NodeJS caches files values returned by ``require`` function. When you call ``require('foo')`` twice or more it returns the same object. **node-direct** clears cache when **.srv.js** file is replaced (eg. you upload another version of such file) and you don't have to reload **node-direct** every time when the file is changed. The problem can appear there when you require other modules by **.srv.js** files.
+```js
+// foo.srv.js
+module.exports = function(req, res) {
+    const bar = require('./bar');
+    // ...
+}
+```
+
+When you change **foo.srv.js** it is reloaded as expected but when you change **./bar** its value returned by ``require`` remains the same. The tool could hot-reload all requested modules but this would make side-effects which may cause unpredictable behavior in other modules. To handle this issue and update module cache you need to define watcher and remove cache when the file is changed.
+
+In example below you do want to hot reload **./bar** when it's changed but you don't want to update **./baz**.
+
+```js
+// foo.srv.js
+
+// for more modules you'll need to use a loop
+const fs = require('fs');
+const barPath = require.resolve('./bar');
+const watcher = fs.watch(barPath, (eventType) => {
+    if (eventType === 'change') {
+        delete require.cache[barPath];
+        watcher.close();
+    }
+});
+
+module.exports = function(req, res) {
+    const bar = require('./bar');
+    const baz = require('./baz');
+    // ...
+}
 ```
