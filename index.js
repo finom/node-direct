@@ -19,9 +19,10 @@ app.use((req, res, next) => {
     let filePath;
 
     if (standalone) {
-        const potentialIndexFile = `./${path.join(req.path.substring(1), `index${ext}`)}`;
+        const potentialIndexFile = path.resolve(root, `.${req.path}`, `./index${ext}`);
+
         if (req.path.endsWith(ext)) {
-            filePath = `./${req.path}`;
+            filePath = path.resolve(root, `.${req.path}`);
         } else if (pathExists.sync(potentialIndexFile)) {
             filePath = potentialIndexFile;
         } else {
