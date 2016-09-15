@@ -29,10 +29,10 @@ app.use((req, res, next) => {
         }
     } else {
         filePath = req.get('X-Requested-File-Path');
-    }
 
-    if (!filePath) {
-        return res.status(500).send('Server did not provide file path via X-Requested-File-Path header');
+        if (!filePath) {
+            return res.status(500).send('Server did not provide file path via X-Requested-File-Path header');
+        }
     }
 
     if (!pathExists.sync(filePath)) {
