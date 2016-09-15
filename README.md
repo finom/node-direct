@@ -13,7 +13,7 @@ npm install -g node-direct
 
 ## Nginx configuration
 
-All the magic mostly happens on Nginx side (the project itself is extremely small). You'll need to configure it to handle requests to **.srv.js** files for every website config.
+All the magic mostly happens on Nginx side (the project itself is extremely small). You'll need to configure it to handle requests to **.srv.js** files.
 
 ```nginx
 location ~ \.srv\.js$ {
