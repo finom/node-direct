@@ -1,6 +1,7 @@
 const path = require('path');
 const pathExists = require('path-exists');
 const fs = require('fs');
+const freshUp = require('fresh-up');
 
 const {
     ext = '.srv.js',
@@ -39,12 +40,7 @@ module.exports = (req, res, next) => {
         return res.status(500).send(`<pre>${e.stack}</pre>`);
     }
 
-    const watcher = fs.watch(filePath, (eventType) => {
-        if (eventType === 'change') {
-            delete require.cache[require.resolve(filePath)];
-            watcher.close();
-        }
-    });
+    freshUp(require.resolve(filePath));
 
     return undefined;
 };
