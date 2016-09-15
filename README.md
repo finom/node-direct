@@ -108,7 +108,7 @@ Example:
 
 ## Troubleshooting
 
-As you know NodeJS caches files values returned by ``require`` function. When you call ``require('foo')`` twice or more it returns the same object. **node-direct** clears cache when **.srv.js** file is replaced (eg. you upload another version of such file) and you don't have to reload **node-direct** every time when the file is changed. The problem can appear there when you require other modules by **.srv.js** files.
+As you know NodeJS caches files values returned by ``require`` function. When you call ``require('foo')`` twice or more it returns the same object. **node-direct** clears cache when **.srv.js** file is replaced (eg. you upload another version of such file) and you don't have to reload **node-direct** every time when the file is changed. A problem can appear there when you require other modules by **.srv.js** files.
 ```js
 // foo.srv.js
 module.exports = function(req, res) {
