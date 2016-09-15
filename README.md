@@ -1,6 +1,6 @@
 # node-direct [![npm version](https://badge.fury.io/js/node-direct.svg)](https://badge.fury.io/js/node-direct)
 
-> A NodeJS server which allows to run server-side JavaScript files directly
+> A tool which allows to run server-side JavaScript files directly
 
 If your VPS contains many application and you don't want to set up NodeJS server for every application, you're in the right place. **node-direct** allows to run JavaScript on a server just like **.php** files. The tool initializes one NodeJS instance per many websites and executes JavaScript files when URLs like **example.com/foo/bar.srv.js** are requested. **.srv.js** extension is configurable.
 
