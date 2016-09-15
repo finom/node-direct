@@ -1,14 +1,17 @@
 {
   "name": "node-direct",
   "version": "0.0.0-auto",
-  "engines" : { "node" : ">=6" },
+  "engines": {
+    "node": ">=6"
+  },
   "description": "A server which allows to run JavaScript files directly",
   "bin": "index.js",
   "scripts": {
     "test": "eslint .",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "check-updates": "ncu",
-    "upgrade": "npm run check-updates -- --upgradeAll && npm install"
+    "upgrade": "npm run check-updates -- --upgradeAll && npm install",
+    "start": "nodemon index --standalone --ext=.kuski.js"
   },
   "repository": {
     "type": "git",
@@ -42,8 +45,8 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "file-exists": "^2.0.0",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "path-exists": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^3.5.0",
@@ -52,6 +55,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.2.1",
     "ghooks": "^1.3.2",
+    "nodemon": "^1.10.2",
     "npm-check-updates": "^2.8.0",
     "semantic-release": "^4.3.5",
     "validate-commit-msg": "^2.8.0"

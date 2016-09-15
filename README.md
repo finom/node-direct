@@ -1,6 +1,6 @@
 # node-direct [![npm version](https://badge.fury.io/js/node-direct.svg)](https://badge.fury.io/js/node-direct)
 
-> A NodeJS server which allows to run server-side JavaScript files directly (server must be powered by Nginx).
+> A NodeJS server which allows to run server-side JavaScript files directly
 
 If your VPS contains many application and you don't want to set up NodeJS server for every application, you're in the right place. **node-direct** allows to run JavaScript on a server just like **.php** files. The tool initializes one NodeJS instance per many websites and executes JavaScript files when URLs like **example.com/foo/bar.srv.js** are requested. **.srv.js** extension is configurable.
 
@@ -10,12 +10,6 @@ Install:
 ```sh
 npm install -g node-direct
 ```
-
-Run:
-```sh
-node-direct --port=8000
-```
-
 
 ## Nginx configuration
 
@@ -55,11 +49,15 @@ server {
 
 ## Usage
 
+```sh
+node-direct --port=8000
+```
+
 **node-direct** is powered by [Express](http://expressjs.com/). Every **.srv.js** file should export a function which accepts ``request`` and ``responce`` objects created by Express.
 
 ```js
-const someModule = require('some-module');
 module.exports = function(req, res) {
+    const someModule = require('some-module');
     res.send('it works!');
 }
 ```
@@ -74,6 +72,20 @@ You can use local **package.json** and require any modules by **.srv.js** files 
 /node_modules/ - things installed by "npm install"
 /foo/index.srv.js - some API which allows to make requests to /foo/
 /bar/index.srv.js - some dynamic HTML page returned when /bar/ is requested
+```
+
+### Flags
+#### Common
+- ``--port`` - a port of node-direct server (8123 by default)
+
+#### Standalone mode
+The standalone mode creates static HTTP server which doesn't require Nginx for its work. It can be used for development purposes on your local machine.
+- ``--standalone`` - turns on standalone mode
+- ``--root`` - a root of static files (``process.cwd()`` by default)
+- ``--ext`` - an extension of runnable JS files (**.srv.js** by default)
+
+```sh
+node-direct --port=8000 --standalone --root=./foo/bar --ext=.serverside.js
 ```
 
 
