@@ -1,6 +1,6 @@
-const freshUp = require('fresh-up')
 const path = require('path');
 const pathExists = require('path-exists');
+const fs = require('fs');
 
 const {
     ext = '.srv.js',
@@ -34,7 +34,7 @@ module.exports = (req, res, next) => {
     }
 
     try {
-        require(filePath)(req, res); // eslint-disable-line global-require
+        require(filePath)(req, res);
     } catch (e) {
         return res.status(500).send(`<pre>${e.stack}</pre>`);
     }
@@ -47,4 +47,4 @@ module.exports = (req, res, next) => {
     });
 
     return undefined;
-}
+};

@@ -6,7 +6,8 @@
         "indent": ["error", 4],
         "no-var": "error",
         "comma-dangle": ["error", "never"],
-        "no-console": 0
+        "no-console": 0,
+        "global-require": 0
     },
     "env": {
         "node": true

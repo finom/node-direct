@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const cluster = require('cluster');
 
-if(cluster.isMaster) {
+if (cluster.isMaster) {
     cluster.fork();
     cluster.on('exit', () => {
         console.log('node-direct is crashed. Restarting...');
@@ -9,7 +9,7 @@ if(cluster.isMaster) {
     });
 }
 
-if(cluster.isWorker) {
+if (cluster.isWorker) {
     const express = require('express');
     const bodyParser = require('body-parser');
     const {
