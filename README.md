@@ -140,3 +140,19 @@ module.exports = function(req, res) {
     // ...
 }
 ```
+
+If it looks too tricky check out [fresh-up](https://github.com/finom/fresh-up).
+
+```js
+// foo.srv.js
+
+// for more modules you'll need to use a loop
+const freshUp = require('fresh-up');
+freshUp(require.resolve('./bar');
+
+module.exports = function(req, res) {
+    const bar = require('./bar');
+    const baz = require('./baz');
+    // ...
+}
+```
