@@ -11,7 +11,7 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "check-updates": "ncu",
     "upgrade": "npm run check-updates -- --upgradeAll && npm install",
-    "start": "nodemon index --standalone --ext=.kuski.js"
+    "start": "nodemon index --standalone --ext=.srv.js"
   },
   "repository": {
     "type": "git",
