@@ -108,6 +108,8 @@ Example:
 
 ## Troubleshooting
 
+### Automatic module reload
+
 As you know NodeJS caches files values returned by ``require`` function. When you call ``require('foo')`` twice or more it returns the same object. **node-direct** clears cache when **.srv.js** file is replaced (eg. you upload another version of such file) and you don't have to reload **node-direct** every time when the file is changed. A problem can appear there when you require other modules by **.srv.js** files.
 ```js
 // foo.srv.js
@@ -155,4 +157,15 @@ module.exports = function(req, res) {
     const baz = require('./baz');
     // ...
 }
+```
+
+
+### Potential vulnerability passing ``X-Requested-File-Path`` header
+
+As you may notice, nginx config described above passes requested file path as ``X-Requested-File-Path`` HTTP header. A hacker can use this header to run custom JavaScript files on a server. The server needs to contain dangerous JS script and the hacker needs to know its path relative to root. If you want to close this potential vulnerability you'll need to deny an access to a port used by node-direct with firewall.  
+
+This is how it can be made on Linux:
+```
+sudo ufw enable
+sudo ufw deny 8123
 ```
