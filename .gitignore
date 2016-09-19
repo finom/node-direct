@@ -36,5 +36,7 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-/index.js
-/middleware.js
+index.js
+!src/index.js
+middleware.js
+!src/middleware.js
