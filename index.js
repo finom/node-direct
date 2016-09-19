@@ -1,35 +1,43 @@
 #!/usr/bin/env node
-const cluster = require('cluster');
+'use strict';
+
+var cluster = require('cluster');
 
 if (cluster.isMaster) {
     cluster.fork();
-    cluster.on('exit', () => {
+    cluster.on('exit', function () {
         console.log('node-direct is crashed. Restarting...');
         cluster.fork();
     });
 }
 
 if (cluster.isWorker) {
-    const express = require('express');
-    const bodyParser = require('body-parser');
-    const {
-        port = 8123,
-        root = process.cwd(),
-        standalone
-    } = require('minimist')(process.argv.slice(2));
-    const middleware = require('./middleware');
+    (function () {
+        var express = require('express');
+        var bodyParser = require('body-parser');
 
-    const app = express();
+        var _require = require('minimist')(process.argv.slice(2));
 
-    app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(bodyParser.json());
-    app.use(middleware);
+        var _require$port = _require.port;
+        var port = _require$port === undefined ? 8123 : _require$port;
+        var _require$root = _require.root;
+        var root = _require$root === undefined ? process.cwd() : _require$root;
+        var standalone = _require.standalone;
 
-    if (standalone) {
-        app.use(express.static(root));
-    }
+        var middleware = require('./middleware');
 
-    app.listen(port, () => {
-        console.log(`node-direct listening on port ${port}!`);
-    });
+        var app = express();
+
+        app.use(bodyParser.urlencoded({ extended: false }));
+        app.use(bodyParser.json());
+        app.use(middleware);
+
+        if (standalone) {
+            app.use(express.static(root));
+        }
+
+        app.listen(port, function () {
+            console.log('node-direct listening on port ' + port + '!');
+        });
+    })();
 }

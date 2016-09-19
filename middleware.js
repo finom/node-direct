@@ -1,21 +1,26 @@
-const path = require('path');
-const pathExists = require('path-exists');
-const freshUp = require('fresh-up');
+'use strict';
 
-const {
-    ext = '.srv.js',
-    root = process.cwd(),
-    standalone
-} = require('minimist')(process.argv.slice(2));
+var path = require('path');
+var pathExists = require('path-exists');
+var freshUp = require('fresh-up');
 
-module.exports = (req, res, next) => {
-    let filePath;
+var _require = require('minimist')(process.argv.slice(2));
+
+var _require$ext = _require.ext;
+var ext = _require$ext === undefined ? '.srv.js' : _require$ext;
+var _require$root = _require.root;
+var root = _require$root === undefined ? process.cwd() : _require$root;
+var standalone = _require.standalone;
+
+
+module.exports = function (req, res, next) {
+    var filePath = void 0;
 
     if (standalone) {
-        const potentialIndexFile = path.resolve(root, `.${req.path}`, `./index${ext}`);
+        var potentialIndexFile = path.resolve(root, '.' + req.path, './index' + ext);
 
         if (req.path.endsWith(ext)) {
-            filePath = path.resolve(root, `.${req.path}`);
+            filePath = path.resolve(root, '.' + req.path);
         } else if (pathExists.sync(potentialIndexFile)) {
             filePath = potentialIndexFile;
         } else {
@@ -36,7 +41,7 @@ module.exports = (req, res, next) => {
     try {
         require(filePath)(req, res);
     } catch (e) {
-        return res.status(500).send(`<pre>${e.stack}</pre>`);
+        return res.status(500).send('<pre>' + e.stack + '</pre>');
     }
 
     freshUp(require.resolve(filePath));

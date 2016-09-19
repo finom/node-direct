@@ -1,17 +1,16 @@
 {
   "name": "node-direct",
   "version": "0.0.0-auto",
-  "engines": {
-    "node": ">=6"
-  },
   "description": "A server which allows to run server-side JavaScript files via NodeJS as easy as PHP via Apache",
   "bin": "index.js",
   "scripts": {
-    "test": "eslint .",
+    "test": "eslint src",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "check-updates": "ncu",
     "upgrade": "npm run check-updates -- --upgradeAll && npm install",
-    "start": "nodemon index --standalone --ext=.srv.js"
+    "start": "nodemon index --standalone --ext=.srv.js",
+    "prepublish": "npm run transpile",
+    "transpile": "babel src -d ./"
   },
   "repository": {
     "type": "git",
@@ -50,6 +49,8 @@
     "path-exists": "^3.0.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0",
     "eslint": "^3.5.0",
     "eslint-config-airbnb": "^11.1.0",
     "eslint-plugin-import": "^1.14.0",
