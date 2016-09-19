@@ -1,0 +1,2 @@
+require('./nginx');
+require('./standalone');
