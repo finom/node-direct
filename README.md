@@ -166,6 +166,5 @@ As you may notice, nginx config described above passes requested file path as ``
 
 This is how it can be made on Linux:
 ```
-sudo ufw enable
 sudo ufw deny 8123
 ```
