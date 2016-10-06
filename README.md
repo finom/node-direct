@@ -55,12 +55,40 @@ node-direct --port=8000
 
 **node-direct** is powered by [Express](http://expressjs.com/). Every **.srv.js** file should export a function which accepts ``request`` and ``responce`` objects created by Express.
 
+Hello world:
 ```js
 module.exports = function(req, res) {
     const someModule = require('some-module');
-    res.send('it works!');
+    res.send('Hello world!');
 }
 ```
+
+JSON API:
+```js
+module.exports = function(req, res) {
+    if(req.method === 'POST') {
+        req.json({
+            message: 'Everything is awesome'
+        });
+    } else {
+        req.status(400).json({
+            message: 'Only POST requests are allowed'
+        });
+    }
+}
+```
+
+HTML rendering:
+```js
+const fs = require('fs');
+const ejs = require('ejs');
+const template = ejs.compile(fs.readFileSync('./templates/index.html'));
+
+module.exports = function(req, res) {
+    res.type('html').send(template({ foo: 'bar' }));
+}
+```
+
 Check out Express documentation for more info.
 
 You can use local **package.json** and require any modules by **.srv.js** files placed at **node_modules** as you usually do. There is an example of potential file structure of an app.
