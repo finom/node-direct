@@ -34,7 +34,7 @@ module.exports = (req, res, next) => {
     }
 
     try {
-        require(filePath)(req, res);
+        require(filePath)(req, res); // eslint-disable-line import/no-dynamic-require
     } catch (e) {
         return res.status(500).send(`<pre>${e.stack}</pre>`);
     }
