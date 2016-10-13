@@ -4,7 +4,7 @@
 
 If your VPS contains a lot of applications and you don't want to set up NodeJS server for every application, you're in the right place. **node-direct** allows to run JavaScript on a server just like **.php** files are run. The tool initializes one NodeJS instance per many websites and executes JavaScript files when URLs like **example.com/foo/bar.srv.js** are requested. **.srv.js** extension is configurable.
 
-You know how to set up and run PHP script. You just need to upload it and run like this: *example.com/foo.php*. But what about NodeJS? You must define routes, run every app on its own port, se up deployment, make sure that all instances work after server reload... It's OK if you do a big application but when you have only small server-side utilities (like ajax proxy) they just wasting your time.
+You know how to set up and run PHP script. You just need to upload it and run like this: *example.com/foo.php*. But what about NodeJS? You must define routes, run every app on its own port, set up deployment, make sure that all instances work after server reload... It's OK if you do a big application but when you have only small server-side utilities (like ajax proxy) they just wasting your time.
 
 Install:
 ```sh
