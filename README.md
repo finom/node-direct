@@ -53,7 +53,7 @@ server {
 node-direct --port=8000
 ```
 
-**node-direct** is powered by [Express](http://expressjs.com/). Every **.srv.js** file should export a function which accepts ``request`` and ``responce`` objects created by Express.
+**node-direct** is powered by [Express](http://expressjs.com/). Every **.srv.js** file should export a function which accepts ``request`` and ``response`` objects created by Express.
 
 Hello world:
 ```js
