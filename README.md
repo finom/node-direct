@@ -1,4 +1,4 @@
-# node-direct [![npm version](https://badge.fury.io/js/node-direct.svg)](https://badge.fury.io/js/node-direct) [![Build Status](https://travis-ci.org/finom/node-direct.svg?branch=master)](https://travis-ci.org/finom/node-direct) [![Join the chat at https://gitter.im/node-direct-chat/Lobby](https://badges.gitter.im/node-direct-chat/Lobby.svg)](https://gitter.im/node-direct-chat/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# node-direct [![npm version](https://badge.fury.io/js/node-direct.svg)](https://badge.fury.io/js/node-direct) [![Build Status](https://travis-ci.org/finom/node-direct.svg?branch=master)](https://travis-ci.org/finom/node-direct)
 
 > Run server-side JavaScript files directly
 
